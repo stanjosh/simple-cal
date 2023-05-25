@@ -15,13 +15,8 @@ function loadTimeBlockText() {
 
 
 function calendarInit() {
-  var startTime = currentHour.hour() - 3
-  var endTime = currentHour.hour() + 5
-  if (!relevancy) {
-    startTime = 9
-    endTime = 18
-  }
-  
+  var startTime = 9
+  var endTime = 18  
   for (i = startTime; i < endTime ; i++) {
     let time = i 
     if (time == 0) {
@@ -74,16 +69,8 @@ function colorTimeBlocks() {
 }
 
 
-$('#relevantTime').on('click', () => {
-  $('#timeBlockContainer').empty()
-  relevancy = ! relevancy
-  calendarInit()
-})
-
-
 $(document).ready(function() {
 calendarInit()
-
 
 setInterval(() => {
   currentHour = new dayjs();
