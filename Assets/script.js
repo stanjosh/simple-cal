@@ -1,8 +1,7 @@
-$(document).ready(function() {
-
-
 var timeBlockText;
 var currentHour = dayjs();
+var relevancy = false
+
 
 function loadTimeBlockText() {
   timeBlockText = {...localStorage}
@@ -16,7 +15,14 @@ function loadTimeBlockText() {
 
 
 function calendarInit() {
-  for (i=9; i < 18 ; i++) {
+  var startTime = currentHour.hour() - 3
+  var endTime = currentHour.hour() + 5
+  if (!relevancy) {
+    startTime = 9
+    endTime = 18
+  }
+  
+  for (i = startTime; i < endTime ; i++) {
     let time = i 
     if (time == 0) {
       time = '12 AM'
@@ -68,6 +74,14 @@ function colorTimeBlocks() {
 }
 
 
+$('#relevantTime').on('click', () => {
+  $('#timeBlockContainer').empty()
+  relevancy = ! relevancy
+  calendarInit()
+})
+
+
+$(document).ready(function() {
 calendarInit()
 
 
