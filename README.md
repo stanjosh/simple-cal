@@ -1,20 +1,20 @@
-# 05 Third-Party APIs: Work Day Scheduler
+# Work Day Scheduler
+### simple-cal
+## Almost as simple as a paper calendar
 
-## Your Task
+This is a simple calendar app to track your hourly tasks. It features dynamically updated HTML and CSS powered by jQuery.
 
-Create a simple calendar application that allows a user to save events for each hour of the day by modifying starter code. This app will run in the browser and feature dynamically updated HTML and CSS powered by jQuery.
+Uses [Day.js](https://day.js.org/en/) for date and time operations.
 
-You'll need to use the [Day.js](https://day.js.org/en/) library to work with date and time. Be sure to read the documentation carefully and concentrate on using Day.js in the browser.
 
-![A user clicks on slots on the color-coded calendar and edits the events.](./Assets/05-third-party-apis-homework-demo.gif)
+## Action shots (don't blink or you'll miss it)
 
-* Uses a date utility library to work with date and time
+![it stays right there thanks to the magic of localStorage!](./readme/working.gif)
 
-* Application deployed at live URL
 
-* Application loads with no errors
+## Where is it? I want it.
 
-* Application GitHub URL submitted
+[here on github pages!](https://stanjosh.github.io/simple-cal/)
 
-* Repository contains quality README file with description, screenshot, and link to deployed application
+
 
