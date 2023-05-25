@@ -1,12 +1,7 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
+$(document).ready(function() {
 
-var currentHour = 10;
+var currentHour = new Date();
 var timeBlockText;
-
-
-
 
 function loadTimeBlockText() {
   timeBlockText = {...localStorage}
@@ -24,14 +19,36 @@ function clearTimeBlockText() {
 
 }
 
+
 function calendarInit() {
-  currentHour = new Date().getHours()
+  for (i=9; i < 18 ; i++) {
+    let time = i 
+    if (time == 0) {
+      time = '12 AM'
+    }
+    else if (time <= 12) {
+      time += 'AM'
+    }
+    else if (time >= 13) {
+      time -= 12
+      time += 'PM'
+    }
+    
+    let timeBlock = "";
+    timeBlock += '<div id="hour-' + i + '" class="row time-block">'
+    timeBlock += '<div class="col-2 col-md-1 hour text-center py-3">' + time + '</div>'
+    timeBlock += '<textarea class="col-8 col-md-10 description" rows="3"></textarea>'
+    timeBlock += '<button class="btn saveBtn col-2 col-md-1" aria-label="save">'
+    timeBlock += '<i class="fas fa-save" aria-hidden="true"></i>'
+    timeBlock += '</button>'
+    timeBlock += '</div>'
+    $('#timeBlockContainer').append(timeBlock)
+    console.log(timeBlock)
+  }
   loadTimeBlockText()
   colorTimeBlocks()
   displayTime()
 }
-
-
 
 
 $('.time-block .saveBtn').on('click', function() { // miracles
@@ -41,22 +58,13 @@ $('.time-block .saveBtn').on('click', function() { // miracles
 })
 
 
-
-
-
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  //
 function colorTimeBlocks() {
     $('.time-block').each(function(i){
       let hour = $(this).attr('id').split("-")[1]
-      if (hour > currentHour) {
+      if (hour > currentHour.getHours()) {
         $(this).addClass('future')
       }
-      else if (hour < currentHour) {
+      else if (hour < currentHour.getHours()) {
         $(this).addClass('past')
       }
       else{
@@ -66,21 +74,22 @@ function colorTimeBlocks() {
 }
 
 
-
-
-
-
-
-
 function displayTime() {
-  let now = new Date();
+
   const week = ['Sunday', 'Monday', 'Tuesday', 
   'Wednesday', 'Thursday', 'Friday', 'Saturday']
-  let day = week[now.getDay()]
-  let time = now.toLocaleTimeString()
+  let day = week[currentHour.getDay()]
+  let time = currentHour.toLocaleString()
   $('#currentDay').text(day + ', ' + time)
 }
 
-  $(document).ready(function() {
-    calendarInit()
-  })
+
+
+calendarInit()
+
+setInterval(() => {
+  currentHour = new Date();
+  displayTime()
+}, 1000)
+
+})
