@@ -2,7 +2,7 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 
-var currentHour;
+var currentHour = 10;
 var timeBlockText;
 
 
@@ -11,15 +11,12 @@ var timeBlockText;
 function loadTimeBlockText() {
   timeBlockText = {...localStorage}
   for (var i in timeBlockText) {
-    $('.time-block').each(function(i) {
-      console.log($(this).attr('id'))
+    $('.time-block').each(function() {
       let content = timeBlockText[$(this).attr('id')]
-      console.log(content)
       $(this).children('textarea').val(content)
       })
     }
 }
-
 
 
 function clearTimeBlockText() {
@@ -28,14 +25,12 @@ function clearTimeBlockText() {
 }
 
 function calendarInit() {
+  currentHour = new Date().getHours()
   loadTimeBlockText()
-  updateTime()
-  console.log(currentHour)
+  colorTimeBlocks()
 }
 
-function updateTime() {
-  currentHour = new Date().getHours()
-}
+
 
 
 $('.time-block .saveBtn').on('click', function() { // miracles
@@ -54,8 +49,20 @@ $('.time-block .saveBtn').on('click', function() { // miracles
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
   //
-
-
+function colorTimeBlocks() {
+    $('.time-block').each(function(i){
+      let hour = $(this).attr('id').split("-")[1]
+      if (hour > currentHour) {
+        $(this).addClass('future')
+      }
+      else if (hour < currentHour) {
+        $(this).addClass('past')
+      }
+      else{
+        $(this).addClass('present')
+      }
+    })
+}
 
 
 
