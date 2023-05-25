@@ -28,6 +28,7 @@ function calendarInit() {
   currentHour = new Date().getHours()
   loadTimeBlockText()
   colorTimeBlocks()
+  displayTime()
 }
 
 
@@ -71,26 +72,14 @@ function colorTimeBlocks() {
 
 
 
-
-
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-  //
-
-
-
-
-
-
-
-
-
-
-
-  // TODO: Add code to display the current date in the header of the page.
-
-
+function displayTime() {
+  let now = new Date();
+  const week = ['Sunday', 'Monday', 'Tuesday', 
+  'Wednesday', 'Thursday', 'Friday', 'Saturday']
+  let day = week[now.getDay()]
+  let time = now.toLocaleTimeString()
+  $('#currentDay').text(day + ', ' + time)
+}
 
   $(document).ready(function() {
     calendarInit()
